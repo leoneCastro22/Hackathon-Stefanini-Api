@@ -62,8 +62,7 @@ public class PessoaServico implements Serializable {
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public Pessoa salvar(@Valid Pessoa pessoa) {
 	
-		
-	//List<Endereco> enderecos = pessoa.getEnderecos().stream().map(endereco -> endereco).collect(Collectors.toList());
+	
 	List<Endereco> enderecos = new ArrayList<>();
 	for (Endereco enderecoDaPessoa : pessoa.getEnderecos()) {
 		
@@ -132,18 +131,13 @@ public class PessoaServico implements Serializable {
 	}
 
 	
-	public List<Pessoa> obterPessoaCheia() {
-		return dao.getPessoaCheia();
+	public Optional<List<Pessoa>> obterFullPessoa() {
+		return dao.getFullPessoa();
 	}
 
-	
-	
-	
 	public String decodeToImage(String imagem ) {
 		imagem = imagem.split(",")[1];
-		
-		
-		
+				
 		String url = "C:\\Users\\heric\\Desktop\\Hackathon\\Hackathon-Stefanini-Api\\src\\imagens";
 		String url2 = "\\imagem"+ Math.random() + ".jpg";
 	     
@@ -155,10 +149,10 @@ public class PessoaServico implements Serializable {
             
             ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
             image = ImageIO.read(bis);
-            bis.close();
+           bis.close();
            ImageIO.write((RenderedImage)image, "jpg", new File(url+url2));
-        } catch (Exception e) {
-            e.printStackTrace();
+       } catch (Exception e) {
+           e.printStackTrace();
         }
         return url + url2 ;
     }
@@ -186,7 +180,6 @@ public class PessoaServico implements Serializable {
 	/**
 	 * Buscar uma Pessoa pelo ID
 	 */
-//	@Override
 	public Optional<Pessoa> encontrar(Long id) {
 		
 		

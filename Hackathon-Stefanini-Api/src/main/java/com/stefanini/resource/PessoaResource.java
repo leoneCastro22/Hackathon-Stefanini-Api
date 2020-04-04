@@ -54,7 +54,7 @@ public class PessoaResource {
 	
 	@GET
 	public Response obterPessoasCheia() {
-	return Response.ok( pessoaServico.obterPessoaCheia()).build(); 
+	return Response.ok( pessoaServico.obterFullPessoa()).build(); 
 
 	}
 	

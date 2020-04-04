@@ -4,6 +4,9 @@ import com.stefanini.dao.abstracao.GenericDao;
 import com.stefanini.model.Pessoa;
 
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,16 +37,12 @@ public class PessoaDao extends GenericDao<Pessoa, Long> {
 	
 	
 	
-	
-	public List<Pessoa> getPessoaCheia (){
+	// Buscar Pessoa cheia
+	public Optional<List<Pessoa>> getFullPessoa (){
 
-		StringBuilder jpql = new StringBuilder();
-		
-		jpql.append("select distinct p from Pessoa p left join fetch p.enderecos left join fetch p.perfils ORDER BY p.nome");
-
-		TypedQuery<Pessoa> query = entityManager.createQuery(jpql.toString(),Pessoa.class);
-		
-		return query.getResultList();
+		return Optional.of(getEntityManager().createQuery(
+		"select distinct p from Pessoa p left join fetch p.enderecos left join fetch p.perfils " +
+		"ORDER BY p.nome", Pessoa.class).getResultList());
 
 		}
 
