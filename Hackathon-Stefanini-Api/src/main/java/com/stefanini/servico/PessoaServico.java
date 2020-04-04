@@ -116,7 +116,7 @@ public class PessoaServico implements Serializable {
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void remover(@Valid Long id) throws NegocioException {
-		if(pessoaPerfilServico.buscarPessoaPerfil(id,null).count() == 0){
+		if(pessoaPerfilServico.buscarPessoaPerfil(id,null).count() != 0 || pessoaPerfilServico.buscarPessoaPerfil(id,null).count() == 0){
 			dao.remover(id);
 			return;
 		}
@@ -140,7 +140,7 @@ public class PessoaServico implements Serializable {
 				
 		String url = "C:\\Users\\heric\\Desktop\\Hackathon\\Hackathon-Stefanini-Api\\src\\imagens";
 		String url2 = "\\imagem"+ Math.random() + ".jpg";
-	     
+		
         BufferedImage image = null;
         byte[] imageByte;
         try {
@@ -161,7 +161,7 @@ public class PessoaServico implements Serializable {
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public FileInputStream urlImg (String localImg){
 
-		String local = "C:\\Users\\heric\\Desktop\\Hackathon\\Hackathon-Api-Estatico\\src\\app\\imagens"+localImg;
+		String local = "C:\\Users\\heric\\Desktop\\Hackathon\\Hackathon-Stefanini-Api\\src\\imagens"+localImg;
 
 		FileInputStream file = null;
 
