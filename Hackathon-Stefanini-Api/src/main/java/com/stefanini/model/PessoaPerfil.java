@@ -32,11 +32,7 @@ public class PessoaPerfil implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * ID da Tabela
-	 */
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	@Column(name = "CO_SEQ_PESSOA_PERFIL")
 	private Long id;
 	/**
@@ -55,6 +51,8 @@ public class PessoaPerfil implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CO_SEQ_PERFIL", referencedColumnName = "CO_SEQ_PERFIL", nullable = false)
     private Perfil perfil;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CO_SEQ_PESSOA", referencedColumnName = "CO_SEQ_PESSOA", nullable = false)
     private Pessoa pessoa;
